@@ -106,7 +106,7 @@ const idEventDef EV_Player_FinishHearingLoss ( "<finishHearingLoss>", "f" );
 const idEventDef EV_Player_GetAmmoData( "getAmmoData", "s", 'v');
 const idEventDef EV_Player_RefillAmmo( "refillAmmo" );
 const idEventDef EV_Player_SetExtraProjPassEntity( "setExtraProjPassEntity", "E" );
-const idEventDef EV_Player_SetArmor( "setArmor", "f" );
+const idEventDef EV_Player_SetArmor("setArmor", "f");
 const idEventDef EV_Player_DamageEffect( "damageEffect", "sE" );
 const idEventDef EV_Player_AllowFallDamage( "allowFallDamage", "d" );
 
@@ -205,6 +205,9 @@ void idInventory::Clear( void ) {
 	powerups			= 0;
 	armor				= 0;
 	maxarmor			= 0;
+	experience          = 0;
+	level               = 1;
+	money               = 0;
 	secretAreasDiscovered = 0;
 
 	memset( ammo, 0, sizeof( ammo ) );
@@ -339,6 +342,9 @@ void idInventory::RestoreInventory( idPlayer *owner, const idDict &dict ) {
 	maxHealth		= dict.GetInt( "maxhealth", "100" );
 	armor			= dict.GetInt( "armor", "50" );
 	maxarmor		= dict.GetInt( "maxarmor", "100" );
+	experience      = dict.GetInt( "experience", "0" );
+	level           = dict.GetInt( "level", "1" );
+	money           = dict.GetInt( "money", "100" );
 
 	// ammo
 	for( i = 0; i < MAX_AMMOTYPES; i++ ) {
@@ -406,6 +412,7 @@ void idInventory::Save( idSaveGame *savefile ) const {
 	savefile->WriteInt( maxarmor );
 	savefile->WriteInt( experience );
 	savefile->WriteInt( level );
+	savefile->WriteInt( money );
 
 	for( i = 0; i < MAX_AMMO; i++ ) {
 		savefile->WriteInt( ammo[ i ] );
@@ -486,6 +493,9 @@ void idInventory::Restore( idRestoreGame *savefile ) {
 	savefile->ReadInt( powerups );
 	savefile->ReadInt( armor );
 	savefile->ReadInt( maxarmor );
+	savefile->ReadInt( experience );
+	savefile->ReadInt( level );
+	savefile->ReadInt( money );
 
 	for( i = 0; i < MAX_AMMO; i++ ) {
 		savefile->ReadInt( ammo[ i ] );

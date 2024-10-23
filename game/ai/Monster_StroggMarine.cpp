@@ -207,6 +207,8 @@ bool rvMonsterStroggMarine::CheckAction_JumpBack ( rvAIAction* action, int animN
 	return true;
 }
 
+
+
 /*
 ================
 rvMonsterStroggMarine::CheckAction_EvadeLeft
