@@ -197,6 +197,7 @@ public:
 	int						maxHealth;
 	int                     experience;
 	int                     level;
+	int                     money;
 	int						weapons;
 // RITUAL BEGIN
 // squirrel: Mode-agnostic buymenus
